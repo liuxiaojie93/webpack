@@ -4,7 +4,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {CleanWebpackPlugin}= require("clean-webpack-plugin");
 const fs = require("fs");
 const pages = fs.readdirSync(path.resolve(__dirname,"../src/pages"));
-const entrys = {};
+const entrys = {
+    main:"./src/main.js"
+};
 pages.map((item)=>{
     entrys[item] = `./src/pages/${item}/index.js`
 })
@@ -61,7 +63,7 @@ module.exports = {
                 title:"template",
                 filename:`${page}.html`,
                 template:`./src/pages/${page}/index.html`,
-                chunks:[`${page}`],
+                chunks:[`${page}`,'main'],
                 inject: 'head'
             })
         })
