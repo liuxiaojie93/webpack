@@ -1,15 +1,19 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const {CleanWebpackPlugin}= require("clean-webpack-plugin");
+const {CleanWebpackPlugin}= require("clean-webpack-plugin");
+const fs = require("fs");
+const pages = fs.readdirSync(path.resolve(__dirname,"../src/pages"));
+const entrys = {};
+pages.map((item)=>{
+    entrys[item] = `./src/pages/${item}/index.js`
+})
 module.exports = {
     mode:"development",
-    entry:{
-        main:"./src/pages/index/index.js"
-    },
+    entry:entrys,
     output:{
         path:path.resolve(__dirname,"../dist"),
-        filename:"[name]-bundle-[hash].js"
+        filename:"./js/[name].js"
     },
     module:{
         rules:[
@@ -48,17 +52,20 @@ module.exports = {
         port:8090
     },
     plugins:[
-        // new CleanWebpackPlugin(),
+        new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
-            filename: `[name].css`
-            // filename: `${REGION}/css/[name]-[contenthash:8].css`
+            filename: `./css/[name].css`
         }),
-        new HtmlWebpackPlugin({
-            title:"template",
-            chunks:["main","vendor"],
-            filename:"index.html",
-            template:"./src/pages/index/index.html"
+        ...pages.map(page=>{
+            return new HtmlWebpackPlugin({
+                title:"template",
+                filename:`${page}.html`,
+                template:`./src/pages/${page}/index.html`,
+                chunks:[`${page}`],
+                inject: 'head'
+            })
         })
+        
     ]
 
 
