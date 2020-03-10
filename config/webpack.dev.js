@@ -8,7 +8,7 @@ const entrys = {
     main:"./src/main.js"
 };
 pages.map((item)=>{
-    entrys[item] = `./src/pages/${item}/index.js`
+    entrys[item] = `./src/pages/${item}/index.ts`
 })
 module.exports = {
     mode:"development",
@@ -26,17 +26,11 @@ module.exports = {
                     options:"[name].[ext]"
                 }                
             },
-            // {
-            //     test:/\.js$/,
-            //     use:"babel-loader"      
-            // },
-            // {
-            //     test:/\.(tpl|ejs)$/,
-            //     use:[
-            //         "html-withimg-plugin",
-            //         "ejs-loader"
-            //     ]  
-            // },
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/
+              },
             {
                 test:/\.(sa|sc|c)ss$/,
                 use:[
@@ -54,6 +48,9 @@ module.exports = {
             }
         ]
     },
+    resolve: {
+        extensions: [ '.tsx', '.ts', '.js' ]
+      },
     devServer:{
         contentBase:path.resolve(__dirname,"dist"),
         host:"127.0.0.1",
