@@ -20,6 +20,14 @@ module.exports = {
     module:{
         rules:[
             {
+                test:/\.txt$/,
+                use:{
+                    loader:path.resolve(__dirname,"../src/loaders/st-loader.js"),
+                    loader:path.resolve(__dirname,"../src/loaders/cs-loader.js"),
+                    options:"[name].[ext]"
+                }                
+            },
+            {
                 test:/\.(png|jpg)$/,
                 use:{
                     loader:'file-loader',
