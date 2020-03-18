@@ -1,3 +1,3 @@
-console.log("index")
 import "./index.css"
-
+import $  from 'jquery';
+console.log($)
