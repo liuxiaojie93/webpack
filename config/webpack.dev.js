@@ -5,7 +5,7 @@ const {CleanWebpackPlugin}= require("clean-webpack-plugin");
 const fs = require("fs");
 const pages = fs.readdirSync(path.resolve(__dirname,"../src/pages"));
 const entrys = {
-    main:"./src/main.js"
+    main:"./src/main.ts"
 };
 pages.map((item)=>{
     entrys[item] = `./src/pages/${item}/index.ts`
@@ -53,9 +53,9 @@ module.exports = {
       },
     devServer:{
         contentBase:path.resolve(__dirname,"dist"),
-        host:"127.0.0.1",
+        host:"10.118.37.209",
         compress:true,
-        port:8090
+        port:8080
     },
     plugins:[
         new CleanWebpackPlugin(),

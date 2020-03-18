@@ -2,7 +2,7 @@
   "name": "webpack",
   "version": "1.0.0",
   "description": "readme",
-  "main": "index.js",
+  "main": "main.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --config config/webpack.dev.js --open",
@@ -34,5 +34,9 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@types/jquery": "^3.3.33",
+    "domready": "^1.0.8",
+    "jquery": "^3.4.1"
+  }
 }
