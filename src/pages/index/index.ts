@@ -1,4 +1,3 @@
 import "./index.css"
-import $  from 'jquery';
-import './a.txt'
-console.log($)
+import './index.txt'
+console.log("index")

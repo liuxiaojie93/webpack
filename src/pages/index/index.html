@@ -3,43 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>webpack -demo</title>
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-    <div class="video-box">
-
-        <video src="" controls>
-
-        </video>
-
-        <div class="play button">
-            播放
-        </div>
-        <div class="stop button">
-            暂停
-        </div>
-    </div>
-    
-    <script>
-
-        $(function(){
-            let $video = document.querySelector("video");
-            $video.addEventListener(`webkitendfullscreen`,function(){
-                setTimeout(()=>{
-                    $video.play()
-                },500)
-            })
-            $video.addEventListener("pause",function(){
-                console.log("暂停")
-            })
-            $(".play").on("click",()=>{
-                $video.play()
-            })
-            $(".stop").on("click",()=>{
-                $video.pause()
-            })
-        })
-    </script>
 </body>
 </html>
