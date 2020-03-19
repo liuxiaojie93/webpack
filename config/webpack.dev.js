@@ -21,11 +21,7 @@ module.exports = {
         rules:[
             {
                 test:/\.txt$/,
-                use:{
-                    loader:path.resolve(__dirname,"../src/loaders/st-loader.js"),
-                    loader:path.resolve(__dirname,"../src/loaders/cs-loader.js"),
-                    options:"[name].[ext]"
-                }                
+                loader:path.resolve(__dirname,"../src/loaders/cs-loader.js")
             },
             {
                 test:/\.(png|jpg)$/,
@@ -61,7 +57,7 @@ module.exports = {
       },
     devServer:{
         contentBase:path.resolve(__dirname,"dist"),
-        host:"10.118.37.209",
+        host:"localhost",
         compress:true,
         port:8080
     },
