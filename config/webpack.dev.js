@@ -15,7 +15,7 @@ module.exports = {
     entry: entrys,
     output: {
         path: path.resolve(__dirname, "../dist"),
-        filename: "./js/[name].js"
+        filename: "./js/[name]-[hash].js"
     },
     module: {
         rules: [
@@ -62,6 +62,10 @@ module.exports = {
         host: "localhost",
         compress: true,
         port: 8080
+    },
+    stats:{
+        // all:true,
+        timings:false
     },
     plugins: [
         new CleanWebpackPlugin(),
