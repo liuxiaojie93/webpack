@@ -20,7 +20,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.txt$/,
+                test: /\.cs$/,
                 use: [
                     path.resolve(__dirname, "../src/loaders/st-loader.js"),
                     path.resolve(__dirname, "../src/loaders/cs-loader.js")

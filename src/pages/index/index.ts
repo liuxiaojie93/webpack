@@ -1,5 +1,4 @@
-import "./index.css"
-import './index.txt'
+import './index.cs'
 
 let ps = new Promise((resolve,reject)=>{
     resolve('promise')
