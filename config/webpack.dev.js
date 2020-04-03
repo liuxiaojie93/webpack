@@ -2,6 +2,9 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const authorPlugin = require("../src/plugins/authorPlugin");
+const cleanConsolePlugin = require("../src/plugins/CleanConsolePlugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const fs = require("fs");
 const pages = fs.readdirSync(path.resolve(__dirname, "../src/pages"));
 const entrys = {
@@ -10,6 +13,7 @@ const entrys = {
 pages.map((item) => {
     entrys[item] = `./src/pages/${item}/index.ts`
 })
+debugger
 module.exports = {
     mode: "development",
     entry: entrys,
@@ -20,10 +24,15 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.txt$/,
+                test: /\.cs$/,
                 use: [
                     path.resolve(__dirname, "../src/loaders/st-loader.js"),
-                    path.resolve(__dirname, "../src/loaders/cs-loader.js")
+                ]
+            },
+            {
+                test: /\.es$/,
+                use: [
+                    path.resolve(__dirname, "../src/loaders/es-babel.js"),
                 ]
             },
             {
@@ -61,14 +70,21 @@ module.exports = {
         contentBase: path.resolve(__dirname, "dist"),
         host: "localhost",
         compress: true,
-        port: 8080
+        port: 8090
     },
+    devtool: 'source-map',
     stats:{
         // all:true,
         timings:false
     },
     plugins: [
+        new authorPlugin({
+            author:"liuxiaojie",
+            email:"1245145809@qq.com"
+        }),
         new CleanWebpackPlugin(),
+        new cleanConsolePlugin(),
+        new BundleAnalyzerPlugin(),
         new MiniCssExtractPlugin({
             filename: `./css/[name].css`
         }),
