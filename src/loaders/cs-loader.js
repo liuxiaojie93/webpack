@@ -1,4 +1,4 @@
 module.exports =function(source){
-    console.log('source',JSON.stringify(source) )
+    console.log('source',source )
     return source
 }
