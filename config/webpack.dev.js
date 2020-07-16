@@ -4,7 +4,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const authorPlugin = require("../src/plugins/authorPlugin");
 const cleanConsolePlugin = require("../src/plugins/CleanConsolePlugin");
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const fs = require("fs");
 const pages = fs.readdirSync(path.resolve(__dirname, "../src/pages"));
 const entrys = {
@@ -40,6 +39,7 @@ module.exports = {
                 use: [
                     MiniCssExtractPlugin.loader,
                     "css-loader",
+                    "scss-loader"
                 ]
             },
             {
@@ -71,8 +71,6 @@ module.exports = {
             email:"1245145809@qq.com"
         }),
         new CleanWebpackPlugin(),
-        new cleanConsolePlugin(),
-        new BundleAnalyzerPlugin(),
         new MiniCssExtractPlugin({
             filename: `./css/[name].css`
         }),
