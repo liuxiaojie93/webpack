@@ -10,7 +10,7 @@ const entrys = {
     main: "./src/main.ts"
 };
 pages.map((item) => {
-    entrys[item] = `./src/pages/${item}/index.ts`
+    entrys[item] = `./src/pages/${item}/index.s`
 })
 debugger
 module.exports = {
