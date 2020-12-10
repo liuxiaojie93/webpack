@@ -3,14 +3,13 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const authorPlugin = require("../src/plugins/authorPlugin");
-const cleanConsolePlugin = require("../src/plugins/CleanConsolePlugin");
 const fs = require("fs");
 const pages = fs.readdirSync(path.resolve(__dirname, "../src/pages"));
 const entrys = {
     main: "./src/main.ts"
 };
 pages.map((item) => {
-    entrys[item] = `./src/pages/${item}/index.s`
+    entrys[item] = `./src/pages/${item}/index.js`
 })
 debugger
 module.exports = {
