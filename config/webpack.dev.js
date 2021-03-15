@@ -17,7 +17,8 @@ module.exports = {
     entry: entrys,
     output: {
         path: path.resolve(__dirname, "../dist"),
-        filename: "./js/[name]-[hash].js"
+        filename: "./js/[name]-[hash].js",
+        // publicPath:"/assets/"
     },
     module: {
         rules: [
@@ -25,7 +26,11 @@ module.exports = {
                 test: /\.(png|jpg)$/,
                 use: {
                     loader: 'file-loader',
-                    options: "[name].[ext]"
+                    options:{
+                        name:"[name].[ext]",
+                        outputPath: './images',
+                        publicPath: '/images/',
+                    } 
                 }
             },
             {
@@ -34,11 +39,11 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.(sa|sc|c)ss$/,
+                test: /\.(le|c)ss$/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     "css-loader",
-                    "scss-loader"
+                    "less-loader",
                 ]
             },
             {
@@ -49,6 +54,11 @@ module.exports = {
                 exclude: '/node_modules/'
             }
         ]
+    },
+    resolve:{
+        alias:{
+            "@assets":path.resolve(__dirname,'../src/assets')
+        }
     },
     resolveLoader: {
         modules: ['node_modules', './src/loaders'] // 先从node_modules中查找，没有从loaders文件夹中查找loader1.js
