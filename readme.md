@@ -11,7 +11,7 @@ const px = new Proxy(obj1, {
 console.log(px);
 ```
 
-#### 1、元编程（在语言层面修改逻辑，扩展语言自身能力）
+>#### 1、元编程（在语言层面修改逻辑，扩展语言自身能力）
 
     引入的意义:
     1、功能更加强大，相比Object.defineProperty只能监听对象的读写操作，proxy可以监听
@@ -33,7 +33,7 @@ console.log(px);
 
 ## 二、Iterator（遍历器）
 
-    作用:为所有的数据结构提供统一的接口访问机制，Iterator 接口主要供for...of消费，一种数据结构只要部署了 Iterator 接口，我们就称这种数据结构是“可遍历的”（iterable），ES6 规定，默认的 Iterator 接口部署在数据结构的Symbol.iterator属性，或者说，一个数据结构只要具有Symbol.iterator属性，就可以认为是“可遍历的”
+>    作用:为所有的数据结构提供统一的接口访问机制，Iterator 接口主要供for...of消费，一种数据结构只要部署了 Iterator 接口，我们就称这种数据结构是“可遍历的”（iterable），ES6 规定，默认的 Iterator 接口部署在数据结构的Symbol.iterator属性，或者说，一个数据结构只要具有Symbol.iterator属性，就可以认为是“可遍历的”
 
 ```javascript
 var it = makeIterator(["a", "b"]);
@@ -77,7 +77,7 @@ for (let i of Object.keys(obj1)){
 
 #### 调用 Iterator 接口的场合
 
-（1）解构赋值
+>（1）解构赋值
 
 ```js
 let set = new Set().add("a").add("b").add("c");
@@ -87,7 +87,7 @@ let [x, y] = set;
 let [first, ...rest] = set;
 ```
 
-（2）扩展运算符
+>（2）扩展运算符
 
 ```js
 // 例一
@@ -100,7 +100,7 @@ let arr = ["b", "c"];
 // ['a', 'b', 'c', 'd']
 ```
 
-（3）解构赋值
+>（3）解构赋值
 
 ```js
 let generator = function* () {
@@ -118,7 +118,7 @@ iterator.next(); // { value: 4, done: false }
 iterator.next(); // { value: 5, done: false }
 iterator.next(); // { value: undefined, done: true }
 ```
-（4）其他场合
+>（4）其他场合
 ```js
     for...of
     Array.from()
@@ -127,14 +127,14 @@ iterator.next(); // { value: undefined, done: true }
     Promise.race()
 ```
 
-跟其他遍历方法的比较：
+>跟其他遍历方法的比较：
 ```js
     for ... in 主要用来遍历对象
     for（let i,i<arr.length,i++）复杂
     forEach（）{} 无法退出循环
 ```
 ## 三、Generator 
-    概念：状态机 + 遍历器生成器,for...of循环可以自动遍历 Generator 函数运行时生成的Iterator对象，且此时不再需要调用next方法
+>    概念：状态机 + 遍历器生成器,for...of循环可以自动遍历 Generator 函数运行时生成的Iterator对象，且此时不再需要调用next方法
 
 ```js
 function* helloWorldGenerator() {
@@ -146,7 +146,7 @@ function* helloWorldGenerator() {
 var hw = helloWorldGenerator();
 
 ```
-迭代器
+>迭代器
 ```js
  function* yieldObj(obj){
     const keys = Reflect.ownKeys(obj);
@@ -159,7 +159,7 @@ var hw = helloWorldGenerator();
      console.log(i);
  }
 ```
-异步解决方案
+>异步解决方案
 
 ```js
  function* gen(){
