@@ -189,7 +189,8 @@ fe.next();
 > ES6 的 class 可以看作只是一个语法糖，它的绝大部分功能，ES5 都可以做到，新的 class 写法只是让对象原型的写法更加清晰、更像面向对象编程的语法而已
 
 > 继承原理：
-> 1、原型对象内属性继承 Sub.prototype = Object.create(Sup.prototype)
+> 1、原型对象内属性继承 
+> Sub.prototype = Object.create(Sup.prototype,{ constructor: { value:Sub, ...}});
 > 2、实例属性继承 通过Super.call(this,args) 给子项绑定实例属性
 
 ```js
