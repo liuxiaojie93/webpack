@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const authorPlugin = require("../src/plugins/authorPlugin");
 const fs = require("fs");
 const pages = fs.readdirSync(path.resolve(__dirname, "../src/pages"));
+var px2rem = require('postcss-px2rem');
 const entrys = {
     main: "./src/main.ts"
 };
@@ -43,6 +44,16 @@ module.exports = {
                 use: [
                     MiniCssExtractPlugin.loader,
                     "css-loader",
+                    {
+                        loader: 'postcss-loader',
+                        options:{
+                            postcssOptions:{
+                                plugins:[
+                                    px2rem({remUnit: 100})
+                                ]  
+                            }
+                        }
+                    },
                     "less-loader",
                 ]
             },
@@ -65,9 +76,9 @@ module.exports = {
     },
     devServer: {
         contentBase: path.resolve(__dirname, "dist"),
-        host: "localhost",
+        host: "192.168.0.107",
         compress: true,
-        port: 8090
+        port: 8080
     },
     devtool: 'source-map',
     stats:{
