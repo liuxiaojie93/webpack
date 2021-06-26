@@ -1,7 +1,7 @@
 const { map } = require("jquery");
 
 console.log("index");
-// import './index.less'
+import './index.less'
 const a = Symbol.for("aa")
 if(a){
     console.log("enter",a==true,a);

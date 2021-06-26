@@ -337,3 +337,29 @@ const Suber = (function (_Super) {
 })(Super);
 
 ```
+
+
+## 五、ts 
+
++ #### interface 接口
+> 对提供的数据结构进行类型检查，规范数据结构
+```js
+interface test{
+  name:string,
+  age:number,
+  readOnly sex:number,
+  showName(name:string):void,
+  [propName]:any
+}
+
+const obj:test= {
+  name:"afei",
+  age:20,
+  sex:1,
+  showName(name:string){
+    console.log(this.name)
+  }
+}
+```
++ #### 泛型
+> 泛型可以支持不特定数据类型 
