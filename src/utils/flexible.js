@@ -1,3 +1,4 @@
+import {debounce,throttle} from "./index"
 {
    let docEl = document.documentElement,
     drp = window.devicePixelRatio || 1;
@@ -12,13 +13,14 @@
     document.head.append(metaEl);
   }
   function set2Rem() {
+    console.log("set2Rem");
     const unit = 3.75;
     let rem = docEl.clientWidth / 100 > unit ? 100 : docEl.clientWidth / unit;
-    console.log(docEl.clientWidth,"set2Rem",docEl.clientWidth / 100 > unit);
     docEl.style.fontSize = `${rem}px`;
   }
   set2Rem();
-  window.addEventListener("resize",set2Rem);
+  // window.addEventListener("resize",debounce(set2Rem,300));
+  window.addEventListener("resize",throttle(set2Rem,1000));
   if(drp>=1){
         let testBody = document.createElement("body");
       let testDiv = document.createElement("div");
