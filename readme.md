@@ -364,6 +364,42 @@ const obj:test= {
 + #### 泛型
 > 泛型可以支持不特定数据类型 
 
-## css问题汇总
+## webpack模块化
 
->css 
+>简化版
+```
+(function(modules){
+    let installedModules = {};
+    function __webpack_require__(moduleId){
+        if(installedModules[moduleId]) {
+            return installedModules[moduleId].exports;
+        }
+        let module = installedModules[moduleId] = {
+            moduleId,
+            installed:false,
+            exports:{}
+        }
+        modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+        module.installed = true;
+        return module.exports
+    }
+    __webpack_require__.d = function(exports, name, getter) {
+        Object.defineProperty(exports, name, { enumerable: true, get: getter });
+    }
+    return __webpack_require__(__webpack_require__.s = "./src/pages/index/index.js");
+}({
+    "./src/pages/index/index.js":function(module, __webpack_exports__, __webpack_require__) {
+        var moduleDemo = __webpack_require__(/*! ./module */ "./src/pages/index/module.js");
+        console.log(moduleDemo,"__webpack_require__demo");
+    },
+
+    "./src/pages/index/module.js":function(module, __webpack_exports__, __webpack_require__) {
+        var moduleDemo = __webpack_require__(/*! ./module */ "./src/pages/index/module.js");
+        __webpack_require__.d(__webpack_exports__, "count", function() { return count; });
+        var count = 1;
+    },
+
+}))
+
+
+```
