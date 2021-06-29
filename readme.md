@@ -367,7 +367,8 @@ const obj:test= {
 ## webpack模块化
 
 >简化版
-```
+
+```js
 (function(modules){
     let installedModules = {};
     function __webpack_require__(moduleId){
