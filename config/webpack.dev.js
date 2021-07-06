@@ -68,7 +68,8 @@ module.exports = {
     },
     resolve:{
         alias:{
-            "@assets":path.resolve(__dirname,'../src/assets')
+            assets:path.resolve(__dirname,'../src/assets'),
+            utils:path.resolve(__dirname,'../src/utils')
         }
     },
     resolveLoader: {
@@ -76,9 +77,10 @@ module.exports = {
     },
     devServer: {
         contentBase: path.resolve(__dirname, "dist"),
-        host: "192.168.0.107",
+        host: "localhost",
         compress: true,
-        port: 8080
+        port: 8082,
+        hot:true
     },
     devtool: 'source-map',
     stats:{
