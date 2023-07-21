@@ -10,5 +10,4 @@ module.exports = merge(baseEnv, {
     compress: true,
     port: 8090,
   },
-  devtool:"source-map",
 });
