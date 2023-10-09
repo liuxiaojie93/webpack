@@ -3,7 +3,6 @@ import App from "./App.vue"
 import {router} from "./routers"
 import {store} from "./store"
 
-debugger
 let app = new Vue({
   el: '#app',
   router,

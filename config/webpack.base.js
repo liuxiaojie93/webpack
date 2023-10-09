@@ -7,7 +7,7 @@ const fs = require("fs");
 const { log } = require("console");
 const pages = fs.readdirSync(path.resolve(__dirname, "../src/pages"));
 console.log("__dirname",__dirname);
-
+const webpack  = require("webpack")
 const entrys = {
   // main:"./src/main.js"
 };
@@ -34,11 +34,11 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options:{
-          // video: ['src', 'poster'],
-          // source: 'src',
-          // img: 'src',
-          // image: ['xlink:href', 'href'],
-          // use: ['xlink:href', 'href']
+          video: ['src', 'poster'],
+          source: 'src',
+          img: 'src',
+          image: ['xlink:href', 'href'],
+          use: ['xlink:href', 'href']
         }
       },
       {
@@ -50,6 +50,16 @@ module.exports = {
       },
       {
         test: /\.js$/,
+        include:[path.resolve(__dirname,"../src")],
+        // exclude:{
+        //   // and: [/node_modules/], // Exclude libraries in node_modules ...
+        //   // not: [
+        //   //   // Except for a few of them that needs to be transpiled because they use modern syntax
+        //   //   /unfetch/,
+        //   //   /d3-array|d3-scale/,
+        //   //   /@hapi[\\/]joi-date/,
+        //   // ]
+        // },
         use: {
           loader: "babel-loader",
           options: {
@@ -66,6 +76,7 @@ module.exports = {
                 },
               ],
             ],
+            // cacheDirectory:true
             // plugins: ['@babel/plugin-proposal-class-properties']
           },
         },
@@ -89,6 +100,11 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      PRODUCTION: JSON.stringify(true),
+      'process.env.FOA':JSON.stringify("asdfaf"),
+      "FOO":JSON.stringify("bar")
+    }),
     new VueLoaderPlugin(),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({

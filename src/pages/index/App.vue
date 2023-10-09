@@ -1,14 +1,17 @@
 <template>
     <div class="main-App">
+        12
         <router-view ></router-view>
     </div>
 </template>
 
 <script>
 import moment from "moment"
+console.log("FOO",FOO)
+console.log("process.env.FOA",process.env.FOA)
 export default {
     mounted(){
-        console.log("mounted",this);
+        console.log("mounted");
     }
 }
 </script>
