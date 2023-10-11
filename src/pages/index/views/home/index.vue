@@ -22,7 +22,7 @@ import moment from "moment";
 import pic from "@/assets/images/cyq.jpg";
 import diff from "./componnets/diff.vue";
 import diff3 from "./componnets/diff3.vue";
-import {parseJSONData1,parseJSONData2 } from "./json2"
+import {parseJSONData1,parseJSONData2 } from "./json"
 
 export default {
   components: { diff, diff3 },
