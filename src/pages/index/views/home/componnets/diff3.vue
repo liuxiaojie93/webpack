@@ -7,16 +7,17 @@ import * as Diff2Html from "diff2html";
 import { createPatch } from "diff";
 import hljs from "highlight.js";
 import "highlight.js/styles/googlecode.css";
+// import "diff2html/bundles/css/diff2html.min.css";
 export default {
   directives: {
     highlight: function (el) {
       const blocks = el.querySelectorAll("code");
       blocks.forEach((block) => {
-        const remart = block.querySelector(".data-code-annotation")
-        let str = ''
-        if(remart && remart.dataset && remart.dataset.codeAnnotation){
-          str = `// ${remart.dataset.codeAnnotation}`
-          block.append(str)
+        const remart = block.querySelector(".data-code-annotation");
+        let str = "";
+        if (remart && remart.dataset && remart.dataset.codeAnnotation) {
+          str = `// ${remart.dataset.codeAnnotation}`;
+          block.append(str);
         }
         hljs.highlightBlock(block);
       });
@@ -31,6 +32,14 @@ export default {
       type: [String, Number],
       default: "",
     },
+    renderWhenNoDiff: {
+      type: Boolean,
+      default: false,
+    },
+    fineName:{
+       type: String,
+      default: "",
+    }
   },
   computed: {
     prettyHtml() {
@@ -42,10 +51,17 @@ export default {
       }
       let oldString = this.left;
       let newString = this.right;
-      // oldString = 'File Without Change\tOldString: ======================== \n' + oldString
-      // newString = 'File Without Change\tNewString: ======================== \n' + newString
+      // 文件无变化时添加标识
+      if(this.renderWhenNoDiff){
+        oldString =
+          "File Without Change\tOldString: ======================== \n" +
+          oldString;
+        newString =
+          "File Without Change\tNewString: ======================== \n" +
+          newString;
+      }
       const args = [
-        "test.json",
+        "", // fileName
         oldString,
         newString,
         "",
@@ -59,39 +75,40 @@ export default {
         srcPrefix: "abc",
         drawFileList: false,
         matching: "lines",
-        // renderNothingWhenEmpty: false,
       });
-      console.log("outStr",outStr);
+      console.log("outStr", outStr);
+      // 文件无变化时也展示内容
+      if (this.renderWhenNoDiff) {
+        outStr.map((str) => {
+          for (const k of str.blocks) {
+            k.lines = k.lines.filter(
+              (s) =>
+                !s.content.startsWith("-File Without Change") &&
+                !s.content.startsWith("+File Without Change")
+            );
+          }
+        });
+      }
+
       let html = Diff2Html.html(outStr, {
         inputFormat: "json",
         outputFormat: "side-by-side",
-         srcPrefix: "abc",
+        srcPrefix: "abc",
         drawFileList: false,
         matching: "lines",
-        // renderNothingWhenEmpty: false,
       });
-      console.log("html",html);
+      console.log("html", html);
 
-      const newHtml = html.replace(/&quot;&lt;span data-code-annotation=(.+?)&gt;(.+?)&lt;&#x2F;span&gt;&quot;/g, '<div class="data-code-annotation" data-code-annotation="$1" style="display:inline">$2</div>')
-      
+      const newHtml = html.replace(
+        /&quot;&lt;span data-code-annotation=(.+?)&gt;(.+?)&lt;&#x2F;span&gt;&quot;/g,
+        '<div class="data-code-annotation" data-code-annotation="$1" style="display:inline">$2</div>'
+      );
+
       // const newHtml = html.replace(
       //   /&quot;<ins>&lt;span data-remarks=&#x27;(.+?)&#x27;&gt;(.+?)&lt;&#x2F;span&gt;<\/ins>&quot;/g,
       //   '<div class="data-remark-test" data-remarks="$1" style="display:inline">$2</div>'
       // );
       return hljs(newHtml);
-    },
-  },
-  mounted() {
-    // this.addEvent();
-  },
-  methods: {
-    addEvent() {
-      document
-        .querySelector(".data-remark-test")
-        .addEventListener("click", (e) => {
-          console.log("e", e);
-          alert(e.target.dataset.remarks);
-        });
     },
   },
 };
@@ -116,7 +133,7 @@ export default {
 /deep/ span.d2h-code-line-prefix:first-child {
   display: none;
 }
-.hljs-comment{
-  color: rgba(0,0,0,0.3);
+.hljs-comment {
+  color: rgba(0, 0, 0, 0.3);
 }
 </style>
